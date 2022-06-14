@@ -59,7 +59,8 @@ def ViewStatusCPF(a, b):
                             for i in range(len(information))}
                 seeInfos = str(seeInfos).strip('{}')
                 print(f"\n {seeInfos}")
-                return
+                print(
+                    "-----------------------------------------------------------------------------------------------------------------------------------------")
         else:
             return "invalid"
 
@@ -80,9 +81,9 @@ def UpadatedStatus(status):
         cursor.execute(query, lista)
 
 
-def Value():
+def TotalValue():
     lista = []
-    TotalValue = 0
+    tvalue = 0
     with connection:
         cursor = connection.cursor()
         query = "SELECT value FROM clientes"
@@ -92,5 +93,5 @@ def Value():
         for i in info:
             lista.append(i)
         for v in lista:
-            TotalValue += v[0]
-        return print(f"Valor Total: R${TotalValue}")
+            tvalue += v[0]
+        return print(f"Valor Total: R${tvalue}")

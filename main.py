@@ -97,6 +97,7 @@ def ReportMenu():
             print("Opção inválida")
             time.sleep(3)
             return
+    menu()
 
 
 """Função Registrar"""
@@ -105,6 +106,32 @@ def ReportMenu():
 def Register():
     client = []
 
+    name = Name()
+    client.append(name)
+
+    cpf = Cpf()
+    client.append(int(cpf))
+
+    hosted = Hosted()
+    client.append(int(hosted))
+
+    type_room = TypeRoom()
+    client.append(type_room)
+
+    days = Days()
+    client.append(int(days))
+
+    value = Value(type_room, int(hosted), int(days))
+    client.append(value)
+
+    status = "R"
+    client.append(status)
+
+    print(client)
+    Insert(client)
+
+
+def Name():
     """Registrar nome"""
     name = input("Digite o nome da pessoa titular: ")
     os.system('cls')
@@ -112,8 +139,10 @@ def Register():
         print("O nome é obrigatório")
         name = input("Digite o nome da pessoa titular: ")
         os.system('cls')
-    client.append(name)
+    return name
 
+
+def Cpf():
     """Registrar CPF"""
     cpf = input("Digite o CPF: ")
     os.system('cls')
@@ -121,8 +150,10 @@ def Register():
         print("O CPF é obrigatório")
         cpf = input("Digite o CPF: ")
         os.system('cls')
-    client.append(int(cpf))
+    return cpf
 
+
+def Hosted():
     """Registrar número de pessoas que vão se hospedar"""
     hosted = input("Digite a quantidade de pessoas que vão se hospedar: ")
     os.system('cls')
@@ -130,8 +161,10 @@ def Register():
         print("A quantidade de pessoas hospedadas é obrigatória!")
         hosted = input("Digite a quantidade de pessoas hospedadas:  ")
         os.system('cls')
-    client.append(int(hosted))
+    return hosted
 
+
+def TypeRoom():
     """Registrar o tipo de quarto"""
     type_room = input(
         "Digite o tipo de quarto ( S – Standar, D – Deluxe, P – Premium): ")
@@ -158,9 +191,10 @@ def Register():
         os.system('cls')
         if(type_room == "S" or type_room == "D" or type_room == "P"):
             error = "valid"
+    return type_room
 
-    client.append(type_room)
 
+def Days():
     """Registrar número de dias de hospedagem"""
     days = input("Digite a quantidade de dias de hospedagem: ")
     os.system('cls')
@@ -168,8 +202,10 @@ def Register():
         print("A quantidade de dias de hospedagem é obrigatória!")
         days = input("Digite a quantidade de dias de hospedagem: ")
         os.system('cls')
-    client.append(int(days))
+    return days
 
+
+def Value(type_room, hosted, days):
     """Registrar valor"""
     if(type_room == "S"):
         value = 100 * int(hosted) * int(days)
@@ -177,13 +213,36 @@ def Register():
         value = 200 * int(hosted) * int(days)
     elif(type_room == "P"):
         value = 300 * int(hosted) * int(days)
-    client.append(value)
+    return value
 
-    status = "R"
-    client.append(status)
 
-    print(client)
-    Insert(client)
+def UpdatedStatus():
+    status = input(
+        "Status (R - Reservado, C – Cancelado, A – Ativo, F - Finalizado) : ")
+    status = status.upper()
+    os.system('cls')
+
+    while(status == ''):
+        print("O status é obrigatório!")
+        status = input(
+            "Status (R - Reservado, C – Cancelado, A – Ativo, F - Finalizado) : ")
+        status = status.upper()
+        os.system('cls')
+
+    if(status == "R" or status == "C" or status == "A" or status == "F"):
+        error = "valid"
+    else:
+        error = "invalid"
+
+    while(error == "invalid"):
+        print("Tipo de quarto inválido!")
+        status = input(
+            "Status (R - Reservado, C – Cancelado, A – Ativo, F - Finalizado) : ")
+        status = status.upper()
+        os.system('cls')
+        if(status == "R" or status == "C" or status == "A" or status == "F"):
+            error = "valid"
+    return status
 
 
 """Função Check In"""
@@ -247,7 +306,6 @@ def CheckOut():
 
 
 def Update():
-    """----------------Buscando pessoas por CPF-----------------------------"""
     cpf = input("Digite o CPF para realizar a busca: ")
 
     """Verificando se CPF não está vazio"""
@@ -259,97 +317,31 @@ def Update():
     cpf = int(cpf)
     View(cpf, "cpf")
 
-    """----------------------Selecionando por ID-----------------------------"""
     lista = []
     ClientId = int(input("\nDigite o ID que deseja mudar o status: "))
     os.system('cls')
 
     """-----------Atualizar número de pessoas que vão se hospedar------------"""
-    hosted = input("Digite a quantidade de pessoas que vão se hospedar: ")
-    os.system('cls')
-    while(hosted == ''):
-        print("A quantidade de pessoas hospedadas é obrigatória!")
-        hosted = input("Digite a quantidade de pessoas hospedadas:  ")
-        os.system('cls')
+    hosted = Hosted()
     lista.append(int(hosted))
 
     """-------------------Atualizar o tipo de quarto-------------------------"""
-    type_room = input(
-        "Digite o tipo de quarto ( S – Standar, D – Deluxe, P – Premium): ")
-    type_room = type_room.upper()
-    os.system('cls')
-
-    while(type_room == ''):
-        print("O tipo de quarto é obrigatório!")
-        type_room = input(
-            "Digite o tipo de quarto ( S – Standar, D – Deluxe, P – Premium):")
-        type_room = type_room.upper()
-        os.system('cls')
-
-    if(type_room == "S" or type_room == "D" or type_room == "P"):
-        error = "valid"
-    else:
-        error = "invalid"
-
-    while(error == "invalid"):
-        print("Tipo de quarto inválido!")
-        type_room = input(
-            "Digite o tipo de quarto ( S – Standar, D – Deluxe, P – Premium):")
-        type_room = type_room.upper()
-        os.system('cls')
-        if(type_room == "S" or type_room == "D" or type_room == "P"):
-            error = "valid"
-
+    type_room = TypeRoom()
     lista.append(type_room)
 
     """---------------Atualizar número de dias de hospedagem-----------------"""
-    days = input("Digite a quantidade de dias de hospedagem: ")
-    os.system('cls')
-    while(days == ''):
-        print("A quantidade de dias de hospedagem é obrigatória!")
-        days = input("Digite a quantidade de dias de hospedagem: ")
-        os.system('cls')
+    days = Days()
     lista.append(int(days))
 
     """---------------------------Atualizar valor----------------------------"""
-    if(type_room == "S"):
-        value = 100 * int(hosted) * int(days)
-    elif(type_room == "D"):
-        value = 200 * int(hosted) * int(days)
-    elif(type_room == "P"):
-        value = 300 * int(hosted) * int(days)
+    value = Value(type_room, hosted, days)
     lista.append(value)
 
     """Atualizar o tipo de quarto"""
-    status = input(
-        "Status (R - Reservado, C – Cancelado, A – Ativo, F - Finalizado) : ")
-    status = status.upper()
-    os.system('cls')
-
-    while(status == ''):
-        print("O status é obrigatório!")
-        status = input(
-            "Status (R - Reservado, C – Cancelado, A – Ativo, F - Finalizado) : ")
-        status = status.upper()
-        os.system('cls')
-
-    if(status == "R" or status == "C" or status == "A" or status == "F"):
-        error = "valid"
-    else:
-        error = "invalid"
-
-    while(error == "invalid"):
-        print("Tipo de quarto inválido!")
-        status = input(
-            "Status (R - Reservado, C – Cancelado, A – Ativo, F - Finalizado) : ")
-        status = status.upper()
-        os.system('cls')
-        if(status == "R" or status == "C" or status == "A" or status == "F"):
-            error = "valid"
-
+    status = UpdatedStatus()
     lista.append(status)
-    lista.append(ClientId)
 
+    lista.append(ClientId)
     Upadated(lista)
     os.system('cls')
 
@@ -391,7 +383,7 @@ def StatusF():
 
 
 def ReportValue():
-    Value()
+    TotalValue()
     exitMenu = input("\nPressione ENTER para voltar")
     if(exitMenu == "" or exitMenu != ""):
         ReportMenu()
@@ -415,6 +407,4 @@ def ReportCPF():
 """Chamando menu"""
 menu()
 
-
-print("")
 print("Programa encerrado com sucesso!")
