@@ -32,6 +32,8 @@ def View(info, infoType):
             seeInfos = {information[i]: v[i] for i in range(len(information))}
             seeInfos = str(seeInfos).strip('{}')
             print(f"\n {seeInfos}")
+            print(
+                "-----------------------------------------------------------------------------------------------------------------------------------------")
 
         return
 
