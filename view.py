@@ -14,6 +14,9 @@ def Insert(data):
         cursor.execute(query, data)
 
 
+"""Buscando informações no banco"""
+
+
 def View(info, infoType):
     lista = []
     information = ["Id", 'Nome', 'CPF', 'N° de pessoas',
@@ -36,6 +39,9 @@ def View(info, infoType):
                 "-----------------------------------------------------------------------------------------------------------------------------------------")
 
         return
+
+
+""" Buscar por CPF e STATUS"""
 
 
 def ViewStatusCPF(a, b):
@@ -67,6 +73,9 @@ def ViewStatusCPF(a, b):
             return "invalid"
 
 
+""" Atualização de informações """
+
+
 def Upadated(infos):
     lista = infos
     with connection:
@@ -75,12 +84,18 @@ def Upadated(infos):
         cursor.execute(query, lista)
 
 
+""" Atualização de Status """
+
+
 def UpadatedStatus(status):
     lista = status
     with connection:
         cursor = connection.cursor()
         query = "UPDATE clientes SET status=? WHERE id=?"
         cursor.execute(query, lista)
+
+
+""" Verificação e soma de todos os valores """
 
 
 def TotalValue():

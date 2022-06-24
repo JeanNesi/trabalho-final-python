@@ -127,12 +127,14 @@ def Register():
     status = "R"
     client.append(status)
 
-    print(client)
     Insert(client)
 
 
+"""Registrar nome"""
+
+
 def Name():
-    """Registrar nome"""
+
     name = input("Digite o nome da pessoa titular: ")
     os.system('cls')
     while(name == ""):
@@ -142,8 +144,11 @@ def Name():
     return name
 
 
+"""Registrar CPF"""
+
+
 def Cpf():
-    """Registrar CPF"""
+
     cpf = input("Digite o CPF: ")
     os.system('cls')
     while(cpf == ""):
@@ -153,8 +158,11 @@ def Cpf():
     return cpf
 
 
+"""Registrar número de pessoas que vão se hospedar"""
+
+
 def Hosted():
-    """Registrar número de pessoas que vão se hospedar"""
+
     hosted = input("Digite a quantidade de pessoas que vão se hospedar: ")
     os.system('cls')
     while(hosted == ''):
@@ -164,8 +172,11 @@ def Hosted():
     return hosted
 
 
+"""Registrar o tipo de quarto"""
+
+
 def TypeRoom():
-    """Registrar o tipo de quarto"""
+
     type_room = input(
         "Digite o tipo de quarto ( S – Standar, D – Deluxe, P – Premium): ")
     type_room = type_room.upper()
@@ -194,8 +205,11 @@ def TypeRoom():
     return type_room
 
 
+"""Registrar número de dias de hospedagem"""
+
+
 def Days():
-    """Registrar número de dias de hospedagem"""
+
     days = input("Digite a quantidade de dias de hospedagem: ")
     os.system('cls')
     while(days == ''):
@@ -205,8 +219,11 @@ def Days():
     return days
 
 
+"""Registrar valor"""
+
+
 def Value(type_room, hosted, days):
-    """Registrar valor"""
+
     if(type_room == "S"):
         value = 100 * int(hosted) * int(days)
     elif(type_room == "D"):
@@ -214,6 +231,9 @@ def Value(type_room, hosted, days):
     elif(type_room == "P"):
         value = 300 * int(hosted) * int(days)
     return value
+
+
+""" Função para atualizar status """
 
 
 def UpdatedStatus():
@@ -346,6 +366,9 @@ def Update():
     os.system('cls')
 
 
+""" Visualizar Clientes com status R """
+
+
 def StatusR():
     status = 'R'
     View(status, "status")
@@ -353,6 +376,9 @@ def StatusR():
     exitMenu = input("\nPressione ENTER para voltar")
     if(exitMenu == "" or exitMenu != ""):
         ReportMenu()
+
+
+""" Visualizar Clientes com status C """
 
 
 def StatusC():
@@ -364,6 +390,9 @@ def StatusC():
         ReportMenu()
 
 
+""" Visualizar Clientes com status A """
+
+
 def StatusA():
     status = 'A'
     View(status, "status")
@@ -371,6 +400,9 @@ def StatusA():
     exitMenu = input("\nPressione ENTER para voltar")
     if(exitMenu == "" or exitMenu != ""):
         ReportMenu()
+
+
+""" Visualizar Clientes com status F """
 
 
 def StatusF():
@@ -382,11 +414,17 @@ def StatusF():
         ReportMenu()
 
 
+""" Visualizar a soma dos valores de todos os agendamentos"""
+
+
 def ReportValue():
     TotalValue()
     exitMenu = input("\nPressione ENTER para voltar")
     if(exitMenu == "" or exitMenu != ""):
         ReportMenu()
+
+
+""" Visualizar clientes pelo CPF"""
 
 
 def ReportCPF():
