@@ -103,7 +103,7 @@ def TotalValue():
     tvalue = 0
     with connection:
         cursor = connection.cursor()
-        query = "SELECT value FROM clientes"
+        query = "SELECT value FROM clientes WHERE status='F'"
         cursor.execute(query)
         info = cursor.fetchall()
 
